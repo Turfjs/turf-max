@@ -1,10 +1,10 @@
-var sum = require('./')
+var max = require('./')
 var test = require('tape')
 var polygon = require('turf-polygon')
 var point = require('turf-point')
 var featurecollection =  require('turf-featurecollection')
 
-test('sum', function(t){
+test('max', function(t){
   var poly1 = polygon([[[0,0],[10,0],[10,10], [0,10]]])
   var poly2 = polygon([[[10,0],[20,10],[20,20], [20,0]]])
   var polyFC = featurecollection([poly1, poly2])
@@ -15,11 +15,11 @@ test('sum', function(t){
   var pt5 = point(19,7, {population: 200})
   var ptFC = featurecollection([pt1, pt2, pt3, pt4, pt5])
 
-  var summed = sum(polyFC, ptFC, 'population', 'pop_sum')
+  var maxed = max(polyFC, ptFC, 'population', 'pop_max')
 
-  t.equal(summed.features[0].geometry.type, 'Polygon')
-  t.equal(summed.features[0].properties.pop_sum, 900)
-  t.equal(summed.features[1].properties.pop_sum, 1300)
+  t.equal(maxed.features[0].geometry.type, 'Polygon')
+  t.equal(maxed.features[0].properties.pop_max, 900)
+  t.equal(maxed.features[1].properties.pop_max, 1300)
 
   t.end()
 })
