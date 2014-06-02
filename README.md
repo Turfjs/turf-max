@@ -22,6 +22,6 @@ var ptFC = featurecollection([pt1, pt2, pt3, pt4, pt5])
 
 var maxed = max(polyFC, ptFC, 'population', 'pop_max')
 
-console.log(maxPolys.features[0].properties.pop_max) // 500
-console.log(maxPolys.features[1].properties.pop_max) // 600
+console.log(maxed.features[0].properties.pop_max) // 500
+console.log(maxed.features[1].properties.pop_max) // 600
 ```
