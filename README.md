@@ -4,6 +4,29 @@ turf-max
 
 Calculates the min value of a field for points within a set of polygons.
 
+###Install
+
+```sh
+npm install turf-max
+```
+
+###Parameters
+
+|name|description|
+|---|---|
+|polys|featurecollection of polygons|
+|points|featurecollection of points|
+|inField|field to map|
+|outField|new field|
+
+###Usage
+
+```js
+max(polyFC, ptFC, inField, outField)
+```
+
+###Example
+
 ```js
 var max = require('turf-max')
 var point = require('turf-point')
