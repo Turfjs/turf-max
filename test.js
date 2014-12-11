@@ -2,7 +2,7 @@ var max = require('./');
 var test = require('tape');
 var polygon = require('turf-polygon');
 var point = require('turf-point');
-var featurecollection =  require('turf-featurecollection');
+var featurecollection = require('turf-featurecollection');
 
 test('max', function(t){
   var poly1 = polygon([[[0,0],[10,0],[10,10], [0,10]]]);
