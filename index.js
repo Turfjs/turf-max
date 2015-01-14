@@ -10,7 +10,7 @@ var inside = require('turf-inside');
  * @param {string} inField the field in input data to analyze
  * @param {string} outField the field in which to store results
  * @return {FeatureCollection} a FeatureCollection of {@link Polygon} features
- * with properties listed as `outField` values in `aggregations`
+ * with properties listed as `outField` values
  * @example
  * var polygons = turf.featurecollection([
  *   turf.polygon([[
