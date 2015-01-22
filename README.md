@@ -1,50 +1,71 @@
-turf-max
-========
-[![Build Status](https://travis-ci.org/Turfjs/turf-max.svg?branch=master)](https://travis-ci.org/Turfjs/turf-max)
+# turf-max
 
-Calculates the min value of a field for points within a set of polygons.
+[![build status](https://secure.travis-ci.org/Turfjs/turf-max.png)](http://travis-ci.org/Turfjs/turf-max)
 
-###Install
+turf max module
+
+
+### `turf.max(polygons, points, inField, outField)`
+
+Calculates the maximum value of a field for points within a set of polygons.
+
+
+### Parameters
+
+| parameter  | type              | description                             |
+| ---------- | ----------------- | --------------------------------------- |
+| `polygons` | FeatureCollection | a FeatureCollection of Polygon features |
+| `points`   | FeatureCollection | a FeatureCollection of Point features   |
+| `inField`  | string            | the field in input data to analyze      |
+| `outField` | string            | the field in which to store results     |
+
+
+### Example
+
+```js
+var polygons = turf.featurecollection([
+  turf.polygon([[
+    [101.551437, 3.150114],
+    [101.551437, 3.250208],
+    [101.742324, 3.250208],
+    [101.742324, 3.150114],
+    [101.551437, 3.150114]
+  ]]),
+  turf.polygon([[
+    [101.659927, 3.011612],
+    [101.659927, 3.143944],
+    [101.913986, 3.143944],
+    [101.913986, 3.011612],
+    [101.659927, 3.011612]
+  ]])
+]);
+var points = turf.featurecollection([
+  turf.point([101.56105, 3.213874], {population: 200}),
+  turf.point([101.709365, 3.211817], {population: 600}),
+  turf.point([101.645507, 3.169311], {population: 100}),
+  turf.point([101.708679, 3.071266], {population: 200}),
+  turf.point([101.826782, 3.081551], {population: 300})]);
+
+var aggregated = turf.max(
+  polygons, points, 'population', 'max');
+
+var result = turf.featurecollection(
+  points.features.concat(aggregated.features));
+
+//=result
+```
+
+## Installation
+
+Requires [nodejs](http://nodejs.org/).
 
 ```sh
-npm install turf-max
+$ npm install turf-max
 ```
 
-###Parameters
+## Tests
 
-|name|description|
-|---|---|
-|polys|featurecollection of polygons|
-|points|featurecollection of points|
-|inField|field to map|
-|outField|new field|
-
-###Usage
-
-```js
-max(polyFC, ptFC, inField, outField)
+```sh
+$ npm test
 ```
 
-###Example
-
-```js
-var max = require('turf-max')
-var point = require('turf-point')
-var polygon = require('turf-polygon')
-var featurecollection = require('turf-featurecollection')
-
-var poly1 = polygon([[[0,0],[10,0],[10,10], [0,10]]])
-var poly2 = polygon([[[10,0],[20,10],[20,20], [20,0]]])
-var polyFC = featurecollection([poly1, poly2])
-var pt1 = point(1,1, {population: 500})
-var pt2 = point(1,3, {population: 400})
-var pt3 = point(14,2, {population: 600})
-var pt4 = point(13,1, {population: 500})
-var pt5 = point(19,7, {population: 200})
-var ptFC = featurecollection([pt1, pt2, pt3, pt4, pt5])
-
-var maxed = max(polyFC, ptFC, 'population', 'pop_max')
-
-console.log(maxed.features[0].properties.pop_max) // 500
-console.log(maxed.features[1].properties.pop_max) // 600
-```
