@@ -1,4 +1,3 @@
-var ss = require('simple-statistics');
 var inside = require('turf-inside');
 
 /**
@@ -53,9 +52,19 @@ module.exports = function(polyFC, ptFC, inField, outField){
       if (inside(pt, poly)) {
         values.push(pt.properties[inField]);
       }
-    })
-    poly.properties[outField] = ss.max(values);
-  })
+    });
+    poly.properties[outField] = max(values);
+  });
 
   return polyFC;
+}
+
+function max(x) {
+    var value;
+    for (var i = 0; i < x.length; i++) {
+        // On the first iteration of this loop, max is
+        // undefined and is thus made the maximum element in the array
+        if (x[i] > value || value === undefined) value = x[i];
+    }
+    return value;
 }
