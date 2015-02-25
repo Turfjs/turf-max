@@ -1,7 +1,7 @@
 var inside = require('turf-inside');
 
 /**
- * Calculates the maximum value of a field for points within a set of polygons features.
+ * Calculates the maximum value of a field for points within a set of polygons.
  *
  * @module turf/max
  * @category aggregation
